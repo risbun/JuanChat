@@ -1,0 +1,23 @@
+name: JuanChat
+version: @version@
+main: com.github.thacheesebun.juanchat.Main
+api-version: 1.16
+authors: [ ThaCheeseBun, ReeZey ]
+description: Simple fixes to the chat. Fork of SimpleChat.
+website: https://github.com/ThaCheeseBun/JuanChat
+commands:
+  juanchat:
+    description: Reload JuanChat.
+    usage: /juanchat
+  calc:
+    description: Calculate.
+    usage: /calc <expression>
+  alert:
+    description: Alert a message.
+    usage: /alert <message>
+  show:
+    description: Flex your items.
+    usage: /show
+  f:
+    description: F
+    usage: /f

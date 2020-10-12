@@ -1,0 +1,6 @@
+color: "BLUE"
+
+messages:
+  welcome: "§7Welcome back, <user>!"
+  join: "§ajoined the server"
+  leave: "§cleft the server"
