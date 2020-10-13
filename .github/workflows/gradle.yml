@@ -24,6 +24,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: fakof
+      run: ls -a
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
