@@ -29,3 +29,7 @@ processResources {
         filter ReplaceTokens, tokens: [version: version]
     }
 }
+
+jar {
+    archiveFileName = "juanchat.jar"
+}
