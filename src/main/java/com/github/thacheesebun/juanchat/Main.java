@@ -28,4 +28,8 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         System.out.println("[JuanChat] Disabled.");
     }
+
+    public void doReload(){
+        reloadConfig();
+    }
 }
