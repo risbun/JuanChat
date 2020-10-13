@@ -47,9 +47,3 @@ jobs:
         asset_path: ./build/libs/juanchat.jar
         asset_name: juanchat.jar
         asset_content_type: application/java-archive
-    - name: Publish Release
-      uses: eregon/publish-release@v1.0.3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        release_id: ${{ steps.create_release.outputs.id }}
