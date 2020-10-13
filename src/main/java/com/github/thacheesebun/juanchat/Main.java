@@ -9,18 +9,17 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         plugin = this;
 
-        this.saveDefaultConfig();
+        saveDefaultConfig();
         config = getConfig();
 
-        this.getServer().getPluginManager().registerEvents(new EventManager(), this);
-        this.getCommand("juanchat").setExecutor(new CommandJuanchat());
-        this.getCommand("calc").setExecutor(new CommandCalc());
-        this.getCommand("alert").setExecutor(new CommandAlert());
-        this.getCommand("show").setExecutor(new CommandShow());
-        this.getCommand("f").setExecutor(new CommandF());
+        getServer().getPluginManager().registerEvents(new EventManager(), this);
+        getCommand("juanchat").setExecutor(new CommandJuanchat());
+        getCommand("calc").setExecutor(new CommandCalc());
+        getCommand("alert").setExecutor(new CommandAlert());
+        getCommand("show").setExecutor(new CommandShow());
+        getCommand("f").setExecutor(new CommandF());
 
         System.out.println("[JuanChat] Enabled.");
     }

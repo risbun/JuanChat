@@ -3,14 +3,18 @@ package com.github.thacheesebun.juanchat;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static org.bukkit.ChatColor.*;
+
 public class CommandCalc implements CommandExecutor {
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        //this is just complete garbage but i dont orka
+
         if (sender instanceof Player) {
             final Player player = (Player)sender;
             final StringBuilder builder = new StringBuilder();
@@ -81,14 +85,14 @@ public class CommandCalc implements CommandExecutor {
     }
 
     public void fail(final CommandSender sender) {
-        sender.sendMessage(ChatColor.GRAY + "You need at least " + ChatColor.RED + "ONE" + ChatColor.GRAY + " of these:  " + ChatColor.YELLOW + "*" + ChatColor.GRAY + ", " + ChatColor.GREEN + "+" + ChatColor.GRAY + ", " + ChatColor.RED + "-" + ChatColor.GRAY + " or " + ChatColor.BLUE + "/" + ChatColor.GRAY + "." + ChatColor.YELLOW + "\nExample: /calc 5+5");
+        sender.sendMessage(String.format("%sYou need at least %sONE%s of these:  %s*%s, %s+%s, %s-%s or %s/%s.%s\nExample: /calc 5+5", GRAY, RED, GRAY, YELLOW, GRAY, GREEN, GRAY, RED, GRAY, BLUE, GRAY, YELLOW));
     }
 
     public void fail2(final CommandSender sender) {
-        sender.sendMessage(ChatColor.GRAY + "You can " + ChatColor.BOLD + ChatColor.RED + "only" + ChatColor.RESET + ChatColor.GRAY + " use numbers! " + ChatColor.UNDERLINE + ChatColor.RED + "No decimals" + ChatColor.RESET + ChatColor.GRAY + "!");
+        sender.sendMessage(String.format("%sYou can %s%sonly%s%s use numbers! %s%sNo decimals%s%s!", GRAY, BOLD, RED, RESET, GRAY, UNDERLINE, RED, RESET, GRAY));
     }
 
     public void answer(final CommandSender sender, final float val) {
-        sender.sendMessage(ChatColor.GRAY + "Answer: " + ChatColor.GREEN + val);
+        sender.sendMessage(String.format("%sAnswer: %s%s", GRAY, GREEN, val));
     }
 }

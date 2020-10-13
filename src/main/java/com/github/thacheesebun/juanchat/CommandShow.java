@@ -16,31 +16,32 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Map;
 
+import static org.bukkit.ChatColor.*;
+
 public class CommandShow implements CommandExecutor {
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            ChatColor color = ChatColor.valueOf(Main.config.getString("color"));
-            final Player player = (Player)sender;
-            final StringBuilder builder = new StringBuilder();
+            ChatColor color = valueOf(Main.config.getString("color"));
+            Player player = (Player)sender;
+            StringBuilder builder = new StringBuilder();
             String str = "";
             StringBuilder Info = new StringBuilder();
             if (args.length > 0) {
-                for (final String s : args) {
+                for (String s : args) {
                     builder.append(s).append(" ");
                 }
                 str = builder.toString();
             }
-            final PlayerInventory inventory = player.getInventory();
-            final ItemStack itemStack = inventory.getItemInMainHand();
-            final Material itemType = itemStack.getType();
-            final Map<Enchantment, Integer> map = itemStack.getEnchantments();
-            for (final Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
+            PlayerInventory inventory = player.getInventory();
+            ItemStack itemStack = inventory.getItemInMainHand();
+            Material itemType = itemStack.getType();
+            Map<Enchantment, Integer> map = itemStack.getEnchantments();
+            for (Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
                 Info.append(entry.getKey().getKey().getKey().replace("_", " ")).append(" ").append(entry.getValue()).append("\n");
             }
-            final String text = color + player.getDisplayName() + ChatColor.GRAY + ": " + ChatColor.ITALIC + str + ChatColor.RESET + ChatColor.GRAY + "[" + ChatColor.WHITE + itemType.name().replace("_", " ") + ChatColor.GRAY + "] ";
-            final TextComponent message = new TextComponent(text);
+            TextComponent message = new TextComponent(String.format("%s%s%s: %s%s%s%s[%s%s%s] ", color, player.getDisplayName(), GRAY, ITALIC, str, RESET, GRAY, WHITE, itemType.name().replace("_", " "), GRAY));
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(Info.toString())));
-            for (final Player p : Bukkit.getOnlinePlayers()) {
+            for (Player p : Bukkit.getOnlinePlayers()) {
                 p.spigot().sendMessage(message);
             }
         } else sender.sendMessage("You can't run this as console!");

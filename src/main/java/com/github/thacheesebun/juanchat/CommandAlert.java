@@ -8,20 +8,23 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static org.bukkit.ChatColor.*;
+import static org.bukkit.Sound.*;
+
 public class CommandAlert implements CommandExecutor {
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender.isOp()) {
-            final StringBuilder builder = new StringBuilder();
-            for (final String s : args) {
+            StringBuilder builder = new StringBuilder();
+            for (String s : args) {
                 builder.append(s).append(" ");
             }
-            final String str = builder.toString();
-            for (final Player p : Bukkit.getOnlinePlayers()) {
-                p.sendMessage(String.valueOf(ChatColor.BLUE) + ChatColor.BOLD + "Alert " + ChatColor.GOLD + ">> " + ChatColor.WHITE + str);
-                p.sendTitle(ChatColor.BLUE + "Alert", str, str.length(), str.length() * 5, 5);
-                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+            String str = builder.toString();
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.sendMessage(String.format("%s%sAlert %s>> %s%s", BLUE, BOLD, GOLD, WHITE, str));
+                p.sendTitle(String.format("%sAlert", BLUE), str, str.length(), str.length() * 5, 5);
+                p.playSound(p.getLocation(), ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
             }
-        } else sender.sendMessage(ChatColor.RED + "You are not allowed to send an alert!");
+        } else sender.sendMessage(String.format("%sYou are not allowed to send an alert!", RED));
         return true;
     }
 }

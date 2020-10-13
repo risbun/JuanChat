@@ -18,12 +18,14 @@ public class EventManager implements Listener {
         ChatColor color = ChatColor.valueOf(Main.config.getString("color"));
 
         event.setJoinMessage(null);
-        event.getPlayer().setPlayerListName(color + event.getPlayer().getDisplayName());
-        event.getPlayer().sendMessage(welcome.replaceFirst("<user>", event.getPlayer().getDisplayName()));
 
-        for (final Player p : Bukkit.getOnlinePlayers()) {
-            if (p != event.getPlayer()) {
-                p.sendMessage(color + event.getPlayer().getDisplayName() + " " + joinMessage);
+        Player player = event.getPlayer();
+        player.setPlayerListName(color + event.getPlayer().getDisplayName());
+        player.sendMessage(welcome.replaceFirst("<user>", event.getPlayer().getDisplayName()));
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (p != player) {
+                p.sendMessage(String.format("%s%s %s",color, player.getDisplayName(), joinMessage));
             }
         }
     }
@@ -33,13 +35,19 @@ public class EventManager implements Listener {
         String leaveMessage = Main.config.getString("messages.leave");
         ChatColor color = ChatColor.valueOf(Main.config.getString("color"));
         event.setQuitMessage(null);
-        Bukkit.broadcastMessage(color + event.getPlayer().getDisplayName() + " " + leaveMessage);
+
+        Player player = event.getPlayer();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (p != player) {
+                p.sendMessage(String.format("%s%s %s",color, player.getDisplayName(), leaveMessage));
+            }
+        }
     }
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         ChatColor color = ChatColor.valueOf(Main.config.getString("color"));
-        event.setFormat(color + event.getPlayer().getDisplayName() + ChatColor.WHITE + ": " + event.getMessage());
+        event.setFormat(String.format("%s%s%s: %s", color, event.getPlayer().getDisplayName(), ChatColor.WHITE, event.getMessage()));
     }
 }
 
