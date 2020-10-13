@@ -1,5 +1,14 @@
+# JuanChat config file
+# poggers
+
+# Main color to use across plugin
 color: "BLUE"
 
+# Team mode that uses team colors instead of main color
+# Still uses main color if player is not on a team
+team-mode: false
+
+# Join, leave, whatever messages
 messages:
   welcome: "§7Welcome back, <user>!"
   join: "§ajoined the server"

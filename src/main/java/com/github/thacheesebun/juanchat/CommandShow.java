@@ -16,12 +16,13 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Map;
 
+import static com.github.thacheesebun.juanchat.Main.*;
 import static org.bukkit.ChatColor.*;
 
 public class CommandShow implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            ChatColor color = valueOf(Main.config.getString("color"));
+            ChatColor color = valueOf(config.getString("color"));
             Player player = (Player)sender;
             StringBuilder builder = new StringBuilder();
             String str = "";
