@@ -22,6 +22,8 @@ public final class Main extends JavaPlugin {
         getCommand("f").setExecutor(new CommandF());
 
         System.out.println("[JuanChat] Enabled.");
+
+        //test
     }
 
     @Override
