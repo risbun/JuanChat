@@ -1,5 +1,6 @@
 package com.github.thacheesebun.juanchat;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +25,11 @@ public class EventManager implements Listener {
         player.sendMessage(welcome.replaceFirst("<user>", event.getPlayer().getDisplayName()));
 
         player.setPlayerListName(color + event.getPlayer().getDisplayName());
-        event.setJoinMessage(String.format("%s%s %s",color, player.getDisplayName(), joinMessage));
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (p != player) {
+                p.sendMessage(String.format("%s%s %s",color, player.getDisplayName(), joinMessage));
+            }
+        }
     }
 
     @EventHandler
