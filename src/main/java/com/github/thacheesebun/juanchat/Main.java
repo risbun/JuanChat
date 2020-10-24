@@ -3,7 +3,7 @@ package com.github.thacheesebun.juanchat;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Main extends JavaPlugin {
+public class Main extends JavaPlugin {
     public static JavaPlugin plugin = null;
     public static FileConfiguration config = null;
 
@@ -22,8 +22,6 @@ public final class Main extends JavaPlugin {
         getCommand("f").setExecutor(new CommandF());
 
         System.out.println("[JuanChat] Enabled.");
-
-        //test
     }
 
     @Override
