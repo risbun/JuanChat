@@ -13,22 +13,19 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.scoreboard.Team;
 
 import java.util.Map;
 
-import static com.github.thacheesebun.juanchat.Main.*;
+import static com.github.thacheesebun.juanchat.Utils.*;
 import static org.bukkit.ChatColor.*;
 
 public class CommandShow implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            ChatColor color = valueOf(config.getString("color"));
-            if (config.getBoolean("team-mode")) {
-                Team playerTeam = plugin.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(sender.getName());
-                if (playerTeam != null) color = playerTeam.getColor();
-            }
+        if (sender instanceof Player && sender.hasPermission("juanchat.command.show")) {
+
             Player player = (Player)sender;
+            ChatColor color = playerColor(player);
+
             StringBuilder builder = new StringBuilder();
             String str = "";
             StringBuilder Info = new StringBuilder();
@@ -38,6 +35,7 @@ public class CommandShow implements CommandExecutor {
                 }
                 str = builder.toString();
             }
+
             PlayerInventory inventory = player.getInventory();
             ItemStack itemStack = inventory.getItemInMainHand();
             Material itemType = itemStack.getType();
@@ -45,12 +43,15 @@ public class CommandShow implements CommandExecutor {
             for (Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
                 Info.append(entry.getKey().getKey().getKey().replace("_", " ")).append(" ").append(entry.getValue()).append("\n");
             }
+
             TextComponent message = new TextComponent(String.format("%s%s%s: %s%s%s%s[%s%s%s] ", color, player.getDisplayName(), WHITE, ITALIC, str, RESET, GRAY, WHITE, itemType.name().replace("_", " "), GRAY));
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(Info.toString())));
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.spigot().sendMessage(message);
             }
-        } else sender.sendMessage("You can't run this as console!");
+        } else {
+            sender.sendMessage("You can't run this command as console.");
+        }
         return true;
     }
 }

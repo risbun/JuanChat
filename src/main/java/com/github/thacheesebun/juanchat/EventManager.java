@@ -8,9 +8,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scoreboard.Team;
 
+import static com.github.thacheesebun.juanchat.Utils.*;
 import static com.github.thacheesebun.juanchat.Main.*;
+import static org.bukkit.Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
 
 public class EventManager implements Listener {
 
@@ -22,6 +23,7 @@ public class EventManager implements Listener {
         Player player = event.getPlayer();
         ChatColor color = playerColor(player);
 
+        assert welcome != null;
         player.sendMessage(welcome.replaceFirst("<user>", event.getPlayer().getDisplayName()));
 
         player.setPlayerListName(color + event.getPlayer().getDisplayName());
@@ -46,14 +48,15 @@ public class EventManager implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         ChatColor color = playerColor(event.getPlayer());
         event.setFormat(String.format("%s%s%s: %s", color, event.getPlayer().getDisplayName(), ChatColor.WHITE, event.getMessage()));
-    }
 
-    public ChatColor playerColor(Player p){
-        if (config.getBoolean("team-mode")) {
-            Team playerTeam = plugin.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(p.getName());
-            if (playerTeam != null) return playerTeam.getColor();
+        if (event.getMessage().indexOf('@') != -1) {
+            int i = event.getMessage().indexOf('@');
+            String cutted = event.getMessage().substring(i + 1);
+            cutted = cutted.split(" ")[0];
+
+            Player p = Bukkit.getPlayer(cutted);
+            if (p != null) p.playSound(p.getLocation(), ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         }
-        return ChatColor.valueOf(config.getString("color"));
     }
 
 }

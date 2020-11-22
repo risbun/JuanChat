@@ -6,18 +6,68 @@ authors: [ ThaCheeseBun, ReeZey ]
 description: Simple fixes to the chat. Fork of SimpleChat.
 website: https://github.com/ThaCheeseBun/JuanChat
 commands:
-  juanchat:
-    description: Reload JuanChat.
-    usage: /juanchat
   calc:
-    description: Calculate.
+    description: Calculate
     usage: /calc <expression>
+    permission: juanchat.command.calc
+    permission-message: §cYou don't have permission to calculate.
   alert:
-    description: Alert a message.
+    description: Send a server wide alert
     usage: /alert <message>
+    permission: juanchat.command.alert
+    permission-message: §cYou don't have permission to send an alert.
   show:
-    description: Flex your items.
+    description: Flex your items
     usage: /show
+    permission: juanchat.command.show
+    permission-message: §cYou don't have permission to flex your items.
   f:
     description: F
     usage: /f
+    permission: juanchat.command.f
+    permission-message: §cYou don't have permission to pay respect.
+permissions:
+  juanchat.command.calc:
+    description: Calculate
+    default: true
+  juanchat.command.alert:
+    description: Send a server wide alert
+    default: op
+  juanchat.command.show:
+    description: Flex your items
+    default: true
+  juanchat.command.f:
+    description: F
+    default: op
+  juanchat.color.aqua:
+    description: Aqua color
+  juanchat.color.black:
+    description: Black color
+  juanchat.color.blue:
+    description: Blue color
+  juanchat.color.dark_aqua:
+    description: Dark Aqua color
+  juanchat.color.dark_blue:
+    description: Dark Blue color
+  juanchat.color.dark_gray:
+    description: Dark Gray color
+  juanchat.color.dark_green:
+    description: Dark Green color
+  juanchat.color.dark_red:
+    description: Dark Red color
+  juanchat.color.dark_purple:
+    description: Dark Purple color
+  juanchat.color.gold:
+    description: Gold color
+  juanchat.color.gray:
+    description: Gray color
+  juanchat.color.green:
+    description: Green color
+  juanchat.color.light_purple:
+    description: Light Purple color
+  juanchat.color.red:
+    description: Red color
+  juanchat.color.yellow:
+    description: Yellow color
+  juanchat.color.white:
+    description: White color

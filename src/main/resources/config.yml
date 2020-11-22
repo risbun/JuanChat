@@ -4,9 +4,16 @@
 # Main color to use across plugin
 color: "BLUE"
 
-# Team mode that uses team colors instead of main color
+# Team mode uses team colors instead of main color
 # Still uses main color if player is not on a team
 team-mode: false
+
+# Permission mode uses permission colors
+# Example: juanchat.green
+permission-mode: false
+
+# Ping users in chat using @<player>
+ping: true
 
 # Join, leave, whatever messages
 messages:

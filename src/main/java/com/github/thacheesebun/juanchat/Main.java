@@ -14,8 +14,9 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         config = getConfig();
 
+        if (config.getBoolean("team-mode") && config.getBoolean("permission-mode")) throw new IllegalStateException("You can't have Team mode and Permission mode at the same time");
+
         getServer().getPluginManager().registerEvents(new EventManager(), this);
-        getCommand("juanchat").setExecutor(new CommandJuanchat());
         getCommand("calc").setExecutor(new CommandCalc());
         getCommand("alert").setExecutor(new CommandAlert());
         getCommand("show").setExecutor(new CommandShow());

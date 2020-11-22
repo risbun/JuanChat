@@ -14,6 +14,7 @@ public class CommandCalc implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         //this is just complete garbage but i dont orka
+        //you are garbage
 
         if (sender instanceof Player) {
             final Player player = (Player)sender;
@@ -80,6 +81,8 @@ public class CommandCalc implements CommandExecutor {
                     if (wMath != null) this.answer(player, res);
                 }
             } else this.fail2(player);
+        } else {
+            sender.sendMessage("You can't run this command as console.");
         }
         return true;
     }
@@ -89,7 +92,7 @@ public class CommandCalc implements CommandExecutor {
     }
 
     public void fail2(final CommandSender sender) {
-        sender.sendMessage(String.format("%sYou can %s%sonly%s%s use numbers! %s%sNo decimals%s%s!", GRAY, BOLD, RED, RESET, GRAY, UNDERLINE, RED, RESET, GRAY));
+        sender.sendMessage(String.format("%sYou can %s%sonly%s%s use whole numbers. %s%sNo decimals%s%s!", GRAY, BOLD, RED, RESET, GRAY, UNDERLINE, RED, RESET, GRAY));
     }
 
     public void answer(final CommandSender sender, final float val) {
