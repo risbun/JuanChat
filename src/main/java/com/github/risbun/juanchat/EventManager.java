@@ -1,4 +1,4 @@
-package com.github.thacheesebun.juanchat;
+package com.github.risbun.juanchat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,8 +10,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.MetadataValue;
 
-import static com.github.thacheesebun.juanchat.Utils.*;
-import static com.github.thacheesebun.juanchat.Main.*;
+import static com.github.risbun.juanchat.Utils.*;
+import static com.github.risbun.juanchat.Main.*;
 import static org.bukkit.Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
 
 public class EventManager implements Listener {
@@ -25,7 +25,7 @@ public class EventManager implements Listener {
             if (meta.asBoolean()) skip = true;
         }
 
-        if(!skip){
+        if (!skip) {
             String welcome = config.getString("messages.welcome");
             String joinMessage = config.getString("messages.join");
 
@@ -58,8 +58,7 @@ public class EventManager implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         ChatColor color = playerColor(event.getPlayer());
         String msg = event.getMessage();
-        if(msg.endsWith("/"))
-            msg = msg.substring(0,msg.length()-1);
+        if (msg.endsWith("/")) msg = msg.substring(0, msg.length() - 1);
 
         event.setFormat(String.format("%s%s%s: %s", color, event.getPlayer().getDisplayName(), ChatColor.WHITE, msg));
 

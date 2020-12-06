@@ -1,10 +1,10 @@
 name: JuanChat
 version: @version@
-main: com.github.thacheesebun.juanchat.Main
+main: com.github.risbun.juanchat.Main
 api-version: 1.16
 authors: [ ThaCheeseBun, ReeZey ]
 description: Simple fixes to the chat. Fork of SimpleChat.
-website: https://github.com/ThaCheeseBun/JuanChat
+website: https://github.com/risbun/JuanChat
 commands:
   calc:
     description: Calculate
@@ -26,6 +26,26 @@ commands:
     usage: /f
     permission: juanchat.command.f
     permission-message: §cYou don't have permission to pay respect.
+  msg:
+    description: Message a player
+    usage: /msg <player> <message>
+    permission: juanchat.command.msg
+    permission-message: §cYou don't have permission to send messages.
+  w:
+    description: Message a player
+    usage: /w <player> <message>
+    permission: juanchat.command.msg
+    permission-message: §cYou don't have permission to send messages.
+  togglemod:
+    description: Toggle mod mode
+    usage: /togglemod
+    permission: juanchat.command.togglemod
+    permission-message: §cYou don't have permission to toggle mod mode.
+  kill:
+    description: Kill yourself or other players
+    usage: /kill [player]
+    permission: juanchat.command.kill.self
+    permission-message: §cYou don't have permission to kill yourself or others.
 permissions:
   juanchat.command.calc:
     description: Calculate
@@ -39,6 +59,23 @@ permissions:
   juanchat.command.f:
     description: F
     default: op
+  juanchat.command.msg:
+    description: Message a player
+    default: true
+  juanchat.command.msg.spy:
+    description: eys
+    default: op
+  juanchat.command.togglemod:
+    description: Toggle mod mode
+    default: op
+  juanchat.command.kill.self:
+    description: sudoku
+    default: true
+  juanchat.command.kill.others:
+    description: murder
+    default: op
+    children:
+      juanchat.command.kill.self: true
   juanchat.color.aqua:
     description: Aqua color
   juanchat.color.black:

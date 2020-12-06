@@ -1,4 +1,4 @@
-package com.github.thacheesebun.juanchat;
+package com.github.risbun.juanchat;
 
 import java.util.regex.Pattern;
 

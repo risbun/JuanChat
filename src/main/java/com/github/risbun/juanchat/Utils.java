@@ -1,14 +1,18 @@
-package com.github.thacheesebun.juanchat;
+package com.github.risbun.juanchat;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
-import static com.github.thacheesebun.juanchat.Main.config;
-import static com.github.thacheesebun.juanchat.Main.plugin;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.github.risbun.juanchat.Main.config;
+import static com.github.risbun.juanchat.Main.plugin;
 
 public class Utils {
-    public static ChatColor playerColor(Player p){
+
+    public static ChatColor playerColor(Player p) {
         if (config.getBoolean("team-mode")) {
             Team playerTeam = plugin.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(p.getName());
             if (playerTeam != null) return playerTeam.getColor();
@@ -31,5 +35,13 @@ public class Utils {
             else if (p.hasPermission("juanchat.color.white")) return ChatColor.WHITE;
         }
         return ChatColor.valueOf(config.getString("color"));
+    }
+
+    public static String[] removeFromArray(String[] arr, int index) {
+        List<String> result = new ArrayList<String>();
+        for (int i = 0; i < arr.length; i++) {
+            if (i != index) result.add(arr[i]);
+        }
+        return result.toArray(new String[result.size()]);
     }
 }

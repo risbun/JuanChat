@@ -1,4 +1,4 @@
-package com.github.thacheesebun.juanchat;
+package com.github.risbun.juanchat;
 
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -16,7 +16,6 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Map;
 
-import static com.github.thacheesebun.juanchat.Utils.*;
 import static org.bukkit.ChatColor.*;
 
 public class CommandShow implements CommandExecutor {
@@ -24,7 +23,7 @@ public class CommandShow implements CommandExecutor {
         if (sender instanceof Player && sender.hasPermission("juanchat.command.show")) {
 
             Player player = (Player)sender;
-            ChatColor color = playerColor(player);
+            ChatColor color = Utils.playerColor(player);
 
             StringBuilder builder = new StringBuilder();
             String str = "";

@@ -1,4 +1,4 @@
-package com.github.thacheesebun.juanchat;
+package com.github.risbun.juanchat;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +21,14 @@ public class Main extends JavaPlugin {
         getCommand("alert").setExecutor(new CommandAlert());
         getCommand("show").setExecutor(new CommandShow());
         getCommand("f").setExecutor(new CommandF());
+        getCommand("togglemod").setExecutor(new CommandTogglemod());
+
+        if (config.getBoolean("msg")) {
+            getCommand("msg").setExecutor(new CommandMsg());
+            getCommand("w").setExecutor(new CommandMsg());
+        }
+
+        if (config.getBoolean("kill")) getCommand("kill").setExecutor(new CommandKill());
 
         System.out.println("[JuanChat] Enabled.");
     }

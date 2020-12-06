@@ -15,6 +15,16 @@ permission-mode: false
 # Ping users in chat using @<player>
 ping: true
 
+# JuanChat msg and reply commands
+# Features stuff like moderation and well, reply
+# "/juanchat togglemod" toggles conversation viewing
+# for moderators
+msg: true
+
+# A builtin kill command
+# Made so people kan kill themself but not others
+kill: true
+
 # Join, leave, whatever messages
 messages:
   welcome: "§7Welcome back, <user>!"
