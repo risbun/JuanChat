@@ -12,6 +12,7 @@ import static com.github.risbun.juanchat.Main.plugin;
 
 public class Utils {
 
+    //sacred method, dont look
     public static ChatColor playerColor(Player p) {
         if (config.getBoolean("team-mode")) {
             Team playerTeam = plugin.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(p.getName());
@@ -38,7 +39,7 @@ public class Utils {
     }
 
     public static String[] removeFromArray(String[] arr, int index) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             if (i != index) result.add(arr[i]);
         }

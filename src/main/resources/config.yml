@@ -27,6 +27,6 @@ kill: true
 
 # Join, leave, whatever messages
 messages:
-  welcome: "§7Welcome back, <user>!"
-  join: "§ajoined the server"
-  leave: "§cleft the server"
+  welcome: "§7Welcome back, %s!"
+  join: "§8[§a+§8] %s §ajoined the server"
+  leave: "§8[§c+§8] %s §cjoined the server"

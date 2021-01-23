@@ -33,14 +33,18 @@ public class EventManager implements Listener {
             ChatColor color = playerColor(player);
 
             assert welcome != null;
-            player.sendMessage(welcome.replaceFirst("<user>", event.getPlayer().getDisplayName()));
+            player.sendMessage(String.format(welcome, player.getDisplayName()));
 
             player.setPlayerListName(color + event.getPlayer().getDisplayName());
             event.setJoinMessage(null);
 
+
+            String playerWithColor = color + player.getDisplayName();
+
             for (Player p : Bukkit.getOnlinePlayers()){
                 if (p == player) continue;
-                p.sendMessage(String.format("%s%s %s",color, player.getDisplayName(), joinMessage));
+                assert joinMessage != null;
+                p.sendMessage(String.format(joinMessage, playerWithColor));
             }
         }
     }
@@ -51,7 +55,10 @@ public class EventManager implements Listener {
         Player player = event.getPlayer();
         ChatColor color = playerColor(player);
 
-        event.setQuitMessage(String.format("%s%s %s",color, player.getDisplayName(), leaveMessage));
+        String playerWithColor = color + player.getDisplayName();
+
+        assert leaveMessage != null;
+        event.setQuitMessage(String.format(leaveMessage, playerWithColor));
     }
 
     @EventHandler
