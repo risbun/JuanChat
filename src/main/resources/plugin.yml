@@ -49,7 +49,7 @@ commands:
 permissions:
   juanchat.command.calc:
     description: Calculate
-    default: true
+    default: not op
   juanchat.command.alert:
     description: Send a server wide alert
     default: op

@@ -1,5 +1,7 @@
 package com.github.risbun.juanchat;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,6 +11,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.MetadataValue;
+
+import java.awt.*;
 
 import static com.github.risbun.juanchat.Utils.*;
 import static com.github.risbun.juanchat.Main.*;
@@ -35,6 +39,7 @@ public class EventManager implements Listener {
             assert welcome != null;
             player.sendMessage(String.format(welcome, player.getDisplayName()));
 
+            player.playerListName();
             player.setPlayerListName(color + event.getPlayer().getDisplayName());
             event.setJoinMessage(null);
 
@@ -55,10 +60,10 @@ public class EventManager implements Listener {
         Player player = event.getPlayer();
         ChatColor color = playerColor(player);
 
-        String playerWithColor = color + player.getDisplayName();
+        String playerWithColor = color + player.displayName();
 
         assert leaveMessage != null;
-        event.setQuitMessage(String.format(leaveMessage, playerWithColor));
+        event.quitMessage(Component.text(String.format(leaveMessage, playerWithColor)));
     }
 
     @EventHandler

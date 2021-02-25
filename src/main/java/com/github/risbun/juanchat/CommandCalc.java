@@ -1,101 +1,106 @@
 package com.github.risbun.juanchat;
 
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import static org.bukkit.ChatColor.*;
 
 public class CommandCalc implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        //this is just complete garbage but i dont orka
-        //you are garbage
-
-        if (sender instanceof Player) {
-            final Player player = (Player)sender;
-            final StringBuilder builder = new StringBuilder();
-            for (final String s : args) {
-                builder.append(s);
-            }
-            String str = builder.toString();
-            if (!str.contains("[a-zA-Z]")) {
-                String[] calc = null;
-                Integer one = null;
-                Integer two = null;
-                Integer wMath = null;
-                boolean minus = false;
-                if (str.startsWith("-")) {
-                    str = str.substring(1);
-                    minus = true;
-                }
-                if (str.contains("*")) {
-                    calc = str.split(Pattern.quote("*"));
-                    wMath = 0;
-                } else if (str.contains("x")) {
-                    calc = str.split(Pattern.quote("*"));
-                    wMath = 0;
-                } else if (str.contains("+")) {
-                    calc = str.split(Pattern.quote("+"));
-                    wMath = 1;
-                } else if (str.contains("/")) {
-                    calc = str.split(Pattern.quote("/"));
-                    wMath = 2;
-                } else if (str.contains("-")) {
-                    calc = str.split(Pattern.quote("-"));
-                    wMath = 3;
-                } else this.fail(player);
-                if (wMath != null) {
-                    try {
-                        one = Integer.valueOf(calc[0]);
-                        two = Integer.valueOf(calc[1]);
-                    } catch (NumberFormatException e) {
-                        this.fail2(player);
-                    }
-                }
-                if (StringUtils.isNumeric(String.valueOf(one)) && StringUtils.isNumeric(String.valueOf(two))) {
-                    float res = 0.0f;
-                    if (minus) one = Math.negateExact(one);
-                    switch (wMath) {
-                        case 0: {
-                            res = one * (float)two;
-                            break;
-                        }
-                        case 1: {
-                            res = (float)(one + two);
-                            break;
-                        }
-                        case 2: {
-                            res = one / (float)two;
-                            break;
-                        }
-                        case 3: {
-                            res = (float)(one - two);
-                            break;
-                        }
-                    }
-                    if (wMath != null) this.answer(player, res);
-                }
-            } else this.fail2(player);
-        } else {
-            sender.sendMessage("You can't run this command as console.");
+        final StringBuilder builder = new StringBuilder();
+        for (final String s : args) {
+            builder.append(s);
         }
+        String str = builder.toString();
+
+        double answer;
+        try {
+            answer = eval(str);
+        }catch(Exception e){
+            sender.sendMessage("error, uh, what did you do? pls stop.");
+            return true;
+        }
+
+        sender.sendMessage("Answer: " + answer);
         return true;
     }
 
-    public void fail(final CommandSender sender) {
-        sender.sendMessage(String.format("%sYou need at least %sONE%s of these:  %s*%s, %s+%s, %s-%s or %s/%s.%s\nExample: /calc 5+5", GRAY, RED, GRAY, YELLOW, GRAY, GREEN, GRAY, RED, GRAY, BLUE, GRAY, YELLOW));
-    }
+    public static double eval(final String str) {
+        return new Object() {
+            int pos = -1, ch;
 
-    public void fail2(final CommandSender sender) {
-        sender.sendMessage(String.format("%sYou can %s%sonly%s%s use whole numbers. %s%sNo decimals%s%s!", GRAY, BOLD, RED, RESET, GRAY, UNDERLINE, RED, RESET, GRAY));
-    }
+            void nextChar() {
+                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+            }
 
-    public void answer(final CommandSender sender, final float val) {
-        sender.sendMessage(String.format("%sAnswer: %s%s", GRAY, GREEN, val));
+            boolean eat(int charToEat) {
+                while (ch == ' ') nextChar();
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+
+            double parse() {
+                nextChar();
+                double x = parseExpression();
+                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                return x;
+            }
+
+            // Grammar:
+            // expression = term | expression `+` term | expression `-` term
+            // term = factor | term `*` factor | term `/` factor
+            // factor = `+` factor | `-` factor | `(` expression `)`
+            //        | number | functionName factor | factor `^` factor
+
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if      (eat('+')) x += parseTerm(); // addition
+                    else if (eat('-')) x -= parseTerm(); // subtraction
+                    else return x;
+                }
+            }
+
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if      (eat('*')) x *= parseFactor(); // multiplication
+                    else if (eat('/')) x /= parseFactor(); // division
+                    else return x;
+                }
+            }
+
+            double parseFactor() {
+                if (eat('+')) return parseFactor(); // unary plus
+                if (eat('-')) return -parseFactor(); // unary minus
+
+                double x;
+                int startPos = this.pos;
+                if (eat('(')) { // parentheses
+                    x = parseExpression();
+                    eat(')');
+                } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                } else if (ch >= 'a' && ch <= 'z') { // functions
+                    while (ch >= 'a' && ch <= 'z') nextChar();
+                    String func = str.substring(startPos, this.pos);
+                    x = parseFactor();
+                    if (func.equals("sqrt")) x = Math.sqrt(x);
+                    else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
+                    else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
+                    else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
+                    else throw new RuntimeException("Unknown function: " + func);
+                } else {
+                    throw new RuntimeException("Unexpected: " + (char)ch);
+                }
+
+                if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
+
+                return x;
+            }
+        }.parse();
     }
 }
