@@ -1,110 +1,31 @@
 name: JuanChat
-version: @version@
+version: '${version}'
 main: com.github.risbun.juanchat.Main
 api-version: 1.16
-authors: [ ThaCheeseBun, ReeZey ]
-description: Simple fixes to the chat. Fork of SimpleChat.
-website: https://github.com/risbun/JuanChat
+authors: [ThaCheeseBun,ReeZey]
+description: Simple chat additions
+website: https://github.com/risbun/juanchat
+softdepend: [LuckPerms]
+
 commands:
-  calc:
-    description: Calculate
-    usage: /calc <expression>
-    permission: juanchat.command.calc
-    permission-message: §cYou don't have permission to calculate.
   alert:
     description: Send a server wide alert
     usage: /alert <message>
     permission: juanchat.command.alert
     permission-message: §cYou don't have permission to send an alert.
-  show:
-    description: Flex your items
-    usage: /show
-    permission: juanchat.command.show
-    permission-message: §cYou don't have permission to flex your items.
   f:
     description: F
     usage: /f
     permission: juanchat.command.f
     permission-message: §cYou don't have permission to pay respect.
-  msg:
-    description: Message a player
-    usage: /msg <player> <message>
-    permission: juanchat.command.msg
-    permission-message: §cYou don't have permission to send messages.
-  w:
-    description: Message a player
-    usage: /w <player> <message>
-    permission: juanchat.command.msg
-    permission-message: §cYou don't have permission to send messages.
-  togglemod:
-    description: Toggle mod mode
-    usage: /togglemod
-    permission: juanchat.command.togglemod
-    permission-message: §cYou don't have permission to toggle mod mode.
-  kill:
-    description: Kill yourself or other players
-    usage: /kill [player]
-    permission: juanchat.command.kill.self
-    permission-message: §cYou don't have permission to kill yourself or others.
+
 permissions:
-  juanchat.command.calc:
-    description: Calculate
-    default: not op
   juanchat.command.alert:
     description: Send a server wide alert
     default: op
-  juanchat.command.show:
-    description: Flex your items
-    default: true
   juanchat.command.f:
     description: F
     default: op
-  juanchat.command.msg:
-    description: Message a player
-    default: true
-  juanchat.command.msg.spy:
-    description: eys
+  juanchat.ping:
+    description: Ping people in chat
     default: op
-  juanchat.command.togglemod:
-    description: Toggle mod mode
-    default: op
-  juanchat.command.kill.self:
-    description: sudoku
-    default: true
-  juanchat.command.kill.others:
-    description: murder
-    default: op
-    children:
-      juanchat.command.kill.self: true
-  juanchat.color.aqua:
-    description: Aqua color
-  juanchat.color.black:
-    description: Black color
-  juanchat.color.blue:
-    description: Blue color
-  juanchat.color.dark_aqua:
-    description: Dark Aqua color
-  juanchat.color.dark_blue:
-    description: Dark Blue color
-  juanchat.color.dark_gray:
-    description: Dark Gray color
-  juanchat.color.dark_green:
-    description: Dark Green color
-  juanchat.color.dark_red:
-    description: Dark Red color
-  juanchat.color.dark_purple:
-    description: Dark Purple color
-  juanchat.color.gold:
-    description: Gold color
-  juanchat.color.gray:
-    description: Gray color
-  juanchat.color.green:
-    description: Green color
-  juanchat.color.light_purple:
-    description: Light Purple color
-  juanchat.color.red:
-    description: Red color
-  juanchat.color.yellow:
-    description: Yellow color
-  juanchat.color.white:
-    description: White color

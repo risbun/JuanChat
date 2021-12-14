@@ -1,32 +1,32 @@
 # JuanChat config file
-# poggers
+# v0.1
 
-# Main color to use across plugin
-color: "BLUE"
+# Main and Fallback color
+# Use anything that's not a color to disable
+color: "white"
 
-# Team mode uses team colors instead of main color
-# Still uses main color if player is not on a team
+# Use colors from player teams
+# Defaults to above color if no team
 team-mode: false
 
-# Permission mode uses permission colors
-# Example: juanchat.green
-permission-mode: false
+# Formatting options
+# use "§" for colors. ex: "§6" for gold
+format:
 
-# Ping users in chat using @<player>
-ping: true
+  # chat messages
+  # arguments: ${prefix} ${suffix} ${player} ${message}
+  chat: "<${prefix}${player}${suffix}§r> ${message}"
 
-# JuanChat msg and reply commands
-# Features stuff like moderation and well, reply
-# "/juanchat togglemod" toggles conversation viewing
-# for moderators
-msg: true
+  # join message
+  # arguments: ${prefix} ${suffix} ${player}
+  join: "${prefix}${player}${suffix}§e joined the game"
 
-# A builtin kill command
-# Made so people kan kill themself but not others
-kill: true
+  # quit message
+  # arguments: ${prefix} ${suffix} ${player}
+  quit: "${prefix}${player}${suffix}§e left the game"
 
-# Join, leave, whatever messages
-messages:
-  welcome: "§7Welcome back, %s!"
-  join: "§8[§a+§8] %s §ajoined the server"
-  leave: "§8[§c+§8] %s §cjoined the server"
+  # welcome message (wow such feature)
+  # showed to joining player
+  # use empty string ("") to disable
+  # arguments: ${prefix} ${suffix} ${player}
+  welcome: ""

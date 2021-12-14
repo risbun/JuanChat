@@ -1,4 +1,4 @@
 # JuanChat
-Simple fixes to chat.
+Simple chat additions
 
 readme will be fixed when i get a life
