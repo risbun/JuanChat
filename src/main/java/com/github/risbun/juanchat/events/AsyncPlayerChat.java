@@ -1,6 +1,6 @@
 package com.github.risbun.juanchat.events;
 
-import com.github.risbun.juanchat.utils.CommonFormatting;
+import com.github.risbun.juanchat.utils.Formatting;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -11,8 +11,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 public class AsyncPlayerChat implements Listener {
     @EventHandler
     public void event(AsyncPlayerChatEvent event) {
-        event.setFormat(CommonFormatting.chatFormat(event.getPlayer(), event.getMessage()));
+        event.setFormat(Formatting.chatFormat(event.getPlayer(), event.getMessage()));
 
+        // ping feature
         if ((event.getMessage().indexOf('@') != -1) &&
                 (event.getPlayer().hasPermission("juanchat.ping"))) {
             final int i = event.getMessage().indexOf('@');

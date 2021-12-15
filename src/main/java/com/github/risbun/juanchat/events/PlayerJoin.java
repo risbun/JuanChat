@@ -3,6 +3,7 @@ package com.github.risbun.juanchat.events;
 import com.github.risbun.juanchat.Main;
 import com.github.risbun.juanchat.utils.PermissionsHelper;
 import com.github.risbun.juanchat.utils.PlayerColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -10,9 +11,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoin implements Listener {
     @EventHandler
     public void event(PlayerJoinEvent event) {
+        final FileConfiguration config = Main.getPlugin().getConfig();
 
         // WelcomeMessage
-        final String welcomeFormat = Main.plugin.getConfig().getString("format.welcome", "");
+        final String welcomeFormat = config.getString("format.welcome", "");
         if (!welcomeFormat.equals("")) {
             // arguments: ${} prefix,suffix,player,message
             final String joinStr = welcomeFormat
@@ -26,7 +28,7 @@ public class PlayerJoin implements Listener {
         }
 
         // JoinMessage
-        final String joinFormat = Main.plugin.getConfig().getString("format.join", "${player}§e joined the game");
+        final String joinFormat = config.getString("format.join", "${player}§e joined the game");
 
         // arguments: ${} prefix,suffix,player,message
         final String joinStr = joinFormat
@@ -37,6 +39,5 @@ public class PlayerJoin implements Listener {
                                 event.getPlayer().getDisplayName()
                 );
         event.setJoinMessage(joinStr);
-
     }
 }

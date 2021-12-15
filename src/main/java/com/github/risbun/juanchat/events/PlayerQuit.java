@@ -10,7 +10,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuit implements Listener {
     @EventHandler
     public void event(PlayerQuitEvent event) {
-        final String format = Main.plugin.getConfig().getString("format.quit", "${player}§e left the game");
+
+        final String format = Main.getPlugin().getConfig().getString("format.quit", "${player}§e left the game");
 
         // arguments: ${} prefix,suffix,player,message
         final String out = format.replaceAll("\\$\\{prefix}", PermissionsHelper.getPrefix(event.getPlayer()))
@@ -19,7 +20,7 @@ public class PlayerQuit implements Listener {
                         PlayerColor.get(event.getPlayer()) +
                                 event.getPlayer().getDisplayName()
                 );
-
         event.setQuitMessage(out);
+
     }
 }

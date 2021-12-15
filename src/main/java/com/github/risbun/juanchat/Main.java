@@ -5,11 +5,10 @@ import com.github.risbun.juanchat.events.AsyncPlayerChat;
 import com.github.risbun.juanchat.events.PlayerJoin;
 import com.github.risbun.juanchat.events.PlayerQuit;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
-    public static JavaPlugin plugin = null;
+    private static JavaPlugin plugin;
 
     @Override
     public void onEnable() {
@@ -36,6 +35,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Disable plugin logic
     }
 
     // setup and verify config
@@ -45,5 +45,10 @@ public final class Main extends JavaPlugin {
         //final FileConfiguration config = getConfig();
         // verify config
         //throw new InvalidConfigurationException("yo");
+    }
+
+    // expose Plugin to other classes
+    public static JavaPlugin getPlugin() {
+        return plugin;
     }
 }

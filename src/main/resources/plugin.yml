@@ -6,6 +6,7 @@ authors: [ThaCheeseBun,ReeZey]
 description: Simple chat additions
 website: https://github.com/risbun/juanchat
 softdepend: [LuckPerms]
+load: POSTWORLD
 
 commands:
   alert:

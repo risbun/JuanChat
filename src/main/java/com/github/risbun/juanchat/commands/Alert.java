@@ -16,7 +16,7 @@ public class Alert implements CommandExecutor {
 
         ChatColor color;
         try {
-            color = ChatColor.valueOf(Main.plugin.getConfig().getString("color", "red").toUpperCase());
+            color = ChatColor.valueOf(Main.getPlugin().getConfig().getString("color", "red").toUpperCase());
         } catch (IllegalArgumentException e) {
             color = ChatColor.RED;
         }

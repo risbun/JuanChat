@@ -11,9 +11,9 @@ public class PlayerColor {
 
     // get color for player
     public static String get(Player p) {
-        final FileConfiguration config = Main.plugin.getConfig();
+        final FileConfiguration config = Main.getPlugin().getConfig();
         if (config.getBoolean("team-mode", false)) {
-            final ScoreboardManager manager = Main.plugin.getServer().getScoreboardManager();
+            final ScoreboardManager manager = Main.getPlugin().getServer().getScoreboardManager();
             if (manager != null) {
                 final Team team = manager.getMainScoreboard().getEntryTeam(p.getName());
                 if (team != null)
@@ -21,7 +21,7 @@ public class PlayerColor {
             }
         }
         try {
-            return ChatColor.valueOf(config.getString("color").toUpperCase()).toString();
+            return ChatColor.valueOf(config.getString("color", "").toUpperCase()).toString();
         } catch (IllegalArgumentException e) {
             return "";
         }
