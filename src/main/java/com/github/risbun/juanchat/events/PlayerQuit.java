@@ -1,8 +1,10 @@
 package com.github.risbun.juanchat.events;
 
 import com.github.risbun.juanchat.Main;
-import com.github.risbun.juanchat.utils.PermissionsHelper;
-import com.github.risbun.juanchat.utils.PlayerColor;
+import com.github.risbun.juanchat.utils.Formatting;
+import com.github.risbun.juanchat.utils.TeamUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -10,17 +12,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuit implements Listener {
     @EventHandler
     public void event(PlayerQuitEvent event) {
+        final Player p = event.getPlayer();
+        final String format = Main.getPlugin().getConfig().getString("format.quit", "&e{player}&e left the game");
 
-        final String format = Main.getPlugin().getConfig().getString("format.quit", "${player}§e left the game");
-
-        // arguments: ${} prefix,suffix,player,message
-        final String out = format.replaceAll("\\$\\{prefix}", PermissionsHelper.getPrefix(event.getPlayer()))
-                .replaceAll("\\$\\{suffix}", PermissionsHelper.getSuffix(event.getPlayer()))
-                .replaceAll("\\$\\{player}",
-                        PlayerColor.get(event.getPlayer()) +
-                                event.getPlayer().getDisplayName()
-                );
-        event.setQuitMessage(out);
-
+        // arguments: {prefix} {suffix} {player}
+        event.setQuitMessage(
+                ChatColor.translateAlternateColorCodes('&', format)
+                .replaceAll("\\{prefix}", Formatting.getPrefix(p))
+                .replaceAll("\\{suffix}", Formatting.getSuffix(p))
+                .replaceAll("\\{player}", TeamUtils.getColor(p) + p.getDisplayName())
+        );
     }
 }

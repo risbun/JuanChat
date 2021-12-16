@@ -1,32 +1,29 @@
 # JuanChat config file
 # v0.1
 
-# Main and Fallback color
-# Use anything that's not a color to disable
-color: "white"
-
-# Use colors from player teams
-# Defaults to above color if no team
-team-mode: false
+# Mode to use for plugin
+# "team": use color, prefix and suffix from minecraft teams
+# "permission": use prefix and suffix from luckperms
+mode: "team"
 
 # Formatting options
-# use "§" for colors. ex: "§6" for gold
+# use "&" for colors. ex: "&6" for gold
 format:
 
   # chat messages
-  # arguments: ${prefix} ${suffix} ${player} ${message}
-  chat: "<${prefix}${player}${suffix}§r> ${message}"
+  # arguments: {prefix} {suffix} {player} {message}
+  chat: "<{prefix}{player}{suffix}&r> {message}"
 
   # join message
-  # arguments: ${prefix} ${suffix} ${player}
-  join: "${prefix}${player}${suffix}§e joined the game"
+  # arguments: {prefix} {suffix} {player}
+  join: "&e{prefix}{player}{suffix}&e joined the game"
 
   # quit message
-  # arguments: ${prefix} ${suffix} ${player}
-  quit: "${prefix}${player}${suffix}§e left the game"
+  # arguments: {prefix} {suffix} {player}
+  quit: "&e{prefix}{player}{suffix}&e left the game"
 
   # welcome message (wow such feature)
   # showed to joining player
   # use empty string ("") to disable
-  # arguments: ${prefix} ${suffix} ${player}
+  # arguments: {prefix} {suffix} {player}
   welcome: ""
