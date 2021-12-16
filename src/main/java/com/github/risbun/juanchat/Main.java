@@ -29,8 +29,9 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 
         // register commands
-        getCommand("alert").setExecutor(new Alert());
-        getCommand("f").setExecutor(new F());
+        getCommand("alert").setExecutor(new CmdAlert());
+        getCommand("f").setExecutor(new CmdF());
+        getCommand("show").setExecutor(new CmdShow());
     }
 
     @Override

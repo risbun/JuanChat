@@ -19,6 +19,11 @@ commands:
     usage: /f
     permission: juanchat.command.f
     permission-message: §cYou don't have permission to pay respect.
+  show:
+    description: Flex your items
+    usage: /show
+    permission: juanchat.command.show
+    permission-message: §cYou don't have permission to flex your items.
 
 permissions:
   juanchat.command.alert:
@@ -26,6 +31,9 @@ permissions:
     default: op
   juanchat.command.f:
     description: F
+    default: op
+  juanchat.command.show:
+    description: Flex your items
     default: op
   juanchat.ping:
     description: Ping people in chat

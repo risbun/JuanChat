@@ -13,7 +13,7 @@ public class PlayerColor {
     public static String get(Player p) {
         final FileConfiguration config = Main.getPlugin().getConfig();
         if (config.getBoolean("team-mode", false)) {
-            final ScoreboardManager manager = Main.getPlugin().getServer().getScoreboardManager();
+            final ScoreboardManager manager = p.getServer().getScoreboardManager();
             if (manager != null) {
                 final Team team = manager.getMainScoreboard().getEntryTeam(p.getName());
                 if (team != null)
