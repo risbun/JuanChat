@@ -2,7 +2,6 @@ package com.github.risbun.juanchat.events;
 
 import com.github.risbun.juanchat.Main;
 import com.github.risbun.juanchat.utils.Formatting;
-import com.github.risbun.juanchat.utils.TeamUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,7 @@ public class PlayerQuit implements Listener {
                 ChatColor.translateAlternateColorCodes('&', format)
                 .replaceAll("\\{prefix}", Formatting.getPrefix(p))
                 .replaceAll("\\{suffix}", Formatting.getSuffix(p))
-                .replaceAll("\\{player}", TeamUtils.getColor(p) + p.getDisplayName())
+                .replaceAll("\\{player}", p.getDisplayName())
         );
     }
 }

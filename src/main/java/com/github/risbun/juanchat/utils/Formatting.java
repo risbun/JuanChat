@@ -33,8 +33,8 @@ public class Formatting {
         return ChatColor.translateAlternateColorCodes('&', format)
                 .replaceAll("\\{prefix}", getPrefix(p))
                 .replaceAll("\\{suffix}", getSuffix(p))
-                .replaceAll("\\{message}", msg)
-                .replaceAll("\\{player}", p.getDisplayName());
+                .replaceAll("\\{player}", p.getDisplayName())
+                .replaceAll("\\{message}", msg);
     }
 
 }

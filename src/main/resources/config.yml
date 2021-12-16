@@ -2,9 +2,10 @@
 # v0.1
 
 # Mode to use for plugin
-# "team": use color, prefix and suffix from minecraft teams
+# "none": only use formatting, {prefix} {suffix} wont work
+# "team": use color, prefix and suffix from teams
 # "permission": use prefix and suffix from luckperms
-mode: "team"
+mode: "none"
 
 # Formatting options
 # use "&" for colors. ex: "&6" for gold
@@ -18,12 +19,12 @@ format:
   # arguments: {prefix} {suffix} {player}
   join: "&e{prefix}{player}{suffix}&e joined the game"
 
-  # quit message
-  # arguments: {prefix} {suffix} {player}
-  quit: "&e{prefix}{player}{suffix}&e left the game"
-
   # welcome message (wow such feature)
   # showed to joining player
   # use empty string ("") to disable
   # arguments: {prefix} {suffix} {player}
   welcome: ""
+
+  # quit message
+  # arguments: {prefix} {suffix} {player}
+  quit: "&e{prefix}{player}{suffix}&e left the game"

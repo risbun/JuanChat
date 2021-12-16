@@ -43,9 +43,6 @@ public final class Main extends JavaPlugin {
     // don't remove might get used in future
     private void setupConfig() throws InvalidConfigurationException {
         saveDefaultConfig();
-        //final FileConfiguration config = getConfig();
-        // verify config
-        //throw new InvalidConfigurationException("yo");
     }
 
     // expose Plugin to other classes

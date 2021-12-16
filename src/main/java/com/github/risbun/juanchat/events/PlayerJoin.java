@@ -2,7 +2,6 @@ package com.github.risbun.juanchat.events;
 
 import com.github.risbun.juanchat.Main;
 import com.github.risbun.juanchat.utils.Formatting;
-import com.github.risbun.juanchat.utils.TeamUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -16,15 +15,19 @@ public class PlayerJoin implements Listener {
         final Player p = event.getPlayer();
         final FileConfiguration config = Main.getPlugin().getConfig();
 
+        // store here in case used twice
+        final String prefix = Formatting.getPrefix(p);
+        final String suffix = Formatting.getSuffix(p);
+
         // WelcomeMessage
         final String welcomeFormat = config.getString("format.welcome", "");
         if (!welcomeFormat.equals("")) {
             // arguments: {prefix} {suffix} {player}
             p.sendMessage(
                     ChatColor.translateAlternateColorCodes('&', welcomeFormat)
-                    .replaceAll("\\{prefix}", Formatting.getPrefix(p))
-                    .replaceAll("\\{suffix}", Formatting.getSuffix(p))
-                    .replaceAll("\\{player}", TeamUtils.getColor(p) + p.getDisplayName())
+                    .replaceAll("\\{prefix}", prefix)
+                    .replaceAll("\\{suffix}", suffix)
+                    .replaceAll("\\{player}", p.getDisplayName())
             );
         }
 
@@ -33,9 +36,13 @@ public class PlayerJoin implements Listener {
         // arguments: {prefix} {suffix} {player}
         event.setJoinMessage(
                 ChatColor.translateAlternateColorCodes('&', joinFormat)
-                .replaceAll("\\{prefix}", Formatting.getPrefix(p))
-                .replaceAll("\\{suffix}", Formatting.getSuffix(p))
-                .replaceAll("\\{player}", TeamUtils.getColor(p) + p.getDisplayName())
+                .replaceAll("\\{prefix}", prefix)
+                .replaceAll("\\{suffix}", suffix)
+                .replaceAll("\\{player}", p.getDisplayName())
         );
+
+        // make name appear on tab as it does with teams
+        if (config.getString("mode", "none").equals("permission"))
+            p.setPlayerListName(prefix + p.getDisplayName() + suffix);
     }
 }
